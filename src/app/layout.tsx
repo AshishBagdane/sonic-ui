@@ -3,8 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { SoundProvider } from "@/components/sound-provider";
-import { HeaderSection } from "@/components/header-section";
-import { Toaster } from "@/components/ui/sonner"; // ← ADD THIS IMPORT
+import { Toaster } from "@/components/ui/sonner";
+import { InitialLoader } from "@/components/initial-loader";
+import Navbar from "@/components/navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,9 +40,12 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <SoundProvider>
+            {/* Initial Loader - shows on first visit */}
+            <InitialLoader />
+
             <div className="relative min-h-screen w-full flex flex-col">
               {/* Header */}
-              <HeaderSection />
+              <Navbar />
 
               {/* Main Content */}
               <main className="flex-1">{children}</main>
@@ -91,7 +95,6 @@ export default function RootLayout({
               </footer>
             </div>
 
-            {/* ← ADD THE TOASTER HERE */}
             <Toaster />
           </SoundProvider>
         </ThemeProvider>
